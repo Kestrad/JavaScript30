@@ -19,9 +19,21 @@
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img src="https://placecats.com/800/500">
 
   <style>
+
+    :root {
+      --base: #fff;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -46,6 +58,11 @@
   </style>
 
   <script>
+    const inputs = document.querySelectorAll(".controls input");
+    function handleUpdate() {
+      document.documentElement.style.setProperty(`--${this.id}`, this.value + (this.dataset.sizing ?? ''));
+    }
+    inputs.forEach(input => input.addEventListener("change", handleUpdate));
   </script>
 
 </body>
